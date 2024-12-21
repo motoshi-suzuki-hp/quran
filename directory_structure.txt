@@ -1,0 +1,42 @@
+project-root/
+│
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   ├── auth.py
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── analysis_service.py
+│   │   │   ├── phoneme_service.py
+│   │   │   └── auth_service.py
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       ├── audio_utils.py
+│   │       ├── jwt_utils.py
+│   │       └── text_utils.py
+│   ├── config.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── App.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── FeedbackTable.tsx
+│   │   │   └── RecordingControl.tsx
+│   │   ├── styles/
+│   │   │   ├── App.css
+│   │   │   └── login.css
+│   │   └── index.tsx
+│   ├── tsconfig.json
+│   ├── package.json
+│   └── Dockerfile
+│
+├── db/
+│   ├── init.sql
+│   └── Dockerfile
+│
+├── docker-compose.yml
+└── README.md
