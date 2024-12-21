@@ -5,7 +5,7 @@ This project is a full-stack web application designed to help users improve thei
 ## Project Structure
 ```
 project/ 
-├── app/ # Backend Flask application 
+├── backend/ # Backend Flask application 
 ├── db/ # PostgreSQL database configuration 
 ├── frontend/ # React frontend application 
 ├── docker-compose.yml 
