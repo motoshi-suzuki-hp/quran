@@ -105,41 +105,25 @@ const App = () => {
           <div style={{ marginTop: "20px" }}>
             <h2>発音フィードバック</h2>
 
-          <ul className='feedback-table'>
-            <ol className='feedback-table-row'>
-              <li>
-                <p>予想されるテキスト:</p>
-                <p>認識されたテキスト:</p>
-                <p>適合率:</p>
-              </li>
-            </ol>
-
-              <ol className='feedback-table-text'>
-                {expectedText.split(" ").map((expectedItem, expectedIndex) => (
-                  highlightIncorrectWords(feedback).map((recognizedItem, recognizedIndex) => (
-                    feedback.map((item, index) => (
-                      (recognizedIndex === index && expectedIndex === index) ? (
-                        <li key={index}>
-                          <p>{expectedItem}</p>
-                          <p>{recognizedItem}</p>
-                          <p style={{ color: item.similarity >= 85 ? "green" : "red" }}>{item.similarity}%</p>
-                        </li>
-                      ) : null
-                    ))
-                  ))
-                ))}
+            <ul className='feedback-table'>
+              <ol className='feedback-table-row'>
+                <li>
+                  <p>予想されるテキスト:</p>
+                  <p>認識されたテキスト:</p>
+                  <p>適合率:</p>
+                </li>
               </ol>
 
               <ol className='feedback-table-text'>
                 {feedback.map((item, index) => (
                   <li key={index}>
-                  <p>{item.expected_text}</p>
-                  <p style={{ color: item.similarity >= 85 ? "green" : "red" }}>{item.predicted_text}</p>
-                  <p style={{ color: item.similarity >= 85 ? "green" : "red" }}>{item.similarity}%</p>
+                    <p>{item.expected_text}</p>
+                    <p style={{ color: item.similarity >= 85 ? "green" : "red" }}>{item.predicted_text}</p>
+                    <p style={{ color: item.similarity >= 85 ? "green" : "red" }}>{item.similarity}%</p>
                   </li>
                 ))}
               </ol>
-          </ul>
+            </ul>
 
             {feedback.length > 0 && (
               <div style={{ marginTop: "10px" }}>
