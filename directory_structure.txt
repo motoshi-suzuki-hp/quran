@@ -1,27 +1,38 @@
 project-root/
 │
 ├── backend/
-│   ├── app/
+│   ├── Dockerfile
+│   ├── app
 │   │   ├── __init__.py
-│   │   ├── routes.py
-│   │   ├── auth.py
-│   │   ├── services/
+│   │   ├── api.py
+│   │   ├── application
 │   │   │   ├── __init__.py
-│   │   │   ├── analysis_service.py
-│   │   │   ├── phoneme_service.py
-│   │   │   └── auth_service.py
-│   │   └── utils/
+│   │   │   └── pronunciation_analyzer.py
+│   │   ├── domain
+│   │   │   ├── __init__.py
+│   │   │   ├── evaluation_service.py
+│   │   │   └── exceptions.py
+│   │   ├── infrastructure
+│   │   │   ├── __init__.py
+│   │   │   ├── audio_converter.py
+│   │   │   └── huggingface_model.py
+│   │   ├── interface
+│   │   │   ├── __init__.py
+│   │   │   └── schema.py
+│   │   └── repository
 │   │       ├── __init__.py
-│   │       ├── audio_utils.py
-│   │       ├── jwt_utils.py
-│   │       └── text_utils.py
-│   ├── config.py
+│   │       └── database.py
+│   ├── app.py
+│   ├── main.py
 │   ├── requirements.txt
-│   └── Dockerfile
+│   ├── setup_database.py
+│   └── temp_audio.wav
 │
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── pages/
+│   │   │   │   └── Detail.tsx
 │   │   │   ├── App.tsx
 │   │   │   ├── Login.tsx
 │   │   │   ├── FeedbackTable.tsx
@@ -36,7 +47,8 @@ project-root/
 │
 ├── db/
 │   ├── init.sql
-│   └── Dockerfile
+│   └── my.cnf
 │
+├── .gitignore
 ├── docker-compose.yml
 └── README.md
