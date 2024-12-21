@@ -1,15 +1,19 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
 from mysql.connector import Error
 
+load_dotenv()
+
 class DatabaseRepository:
-    def __init__(self, host="db", port=3306, user="root", password="password", database="quran", charset="utf8mb4"):
+    def __init__(self):
         self.connection_config = {
-            "host": host,
-            "port": port,
-            "user": user,
-            "password": password,
-            "database": database,
-            "charset": charset,
+            "host": os.getenv("DB_HOST", "db"),
+            "port": int(os.getenv("DB_PORT", 3306)),
+            "user": os.getenv("DB_USER", "root"),
+            "password": os.getenv("DB_PASSWORD", "password"),
+            "database": os.getenv("DB_NAME", "quran"),
+            "charset": "utf8mb4",
         }
 
     def get_record_by_id(self, record_id):

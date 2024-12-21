@@ -9,3 +9,4 @@ torch
 numpy<2
 marshmallow
 mysql-connector-python
+python-dotenv
