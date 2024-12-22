@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Surahs, NumberOfSurahs} from './const';
-// import "./sidebar.css";
+import "./sidebar.css";
 
 const Sidebar: React.FC = () => {
   return (

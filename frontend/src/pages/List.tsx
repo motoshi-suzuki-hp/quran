@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import '/app/src/App.css'
-import { Data } from './interface'
-import { Surahs } from './const'
+import { Data } from '../interface'
+import { Surahs } from '../const'
 
 const List:React.FC = () => {
   const { surah_id } = useParams<{ surah_id: string }>();
@@ -26,7 +26,7 @@ const List:React.FC = () => {
       }
     };
     fetchData();
-  }, [surah_id, navigate]);
+  }, [surah_id]);
 
   const columns = useMemo<ColumnDef<Data>[]>(
     () => [
@@ -51,7 +51,7 @@ const List:React.FC = () => {
   }
 
   return (
-    <div className='app-content' style={{ padding: "20px" }}>
+    <div key={surah_id} className='app-content' style={{ padding: "20px" }}>
       <h1>{Surahs[Number(surah_id)-1]}</h1>
 
       <div className="phrases-table">

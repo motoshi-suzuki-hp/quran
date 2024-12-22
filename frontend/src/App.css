@@ -36,18 +36,39 @@
       transform: rotate(360deg);
     }
   }
+
+body {
+  margin: 0;
+}
   
   #root {
     background-color: #F8F7F1;
     min-height: 100vh;
     
   }
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
   
   .app-content {
     text-align: center;
-    width: 50%;
+    width: 90%;
     margin: auto;
   }
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
   
   .record {
     margin-bottom: 30px;

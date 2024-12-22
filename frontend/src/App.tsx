@@ -1,6 +1,6 @@
 import React from "react";
 // import "./reset.css";
-import List from "./List";
+import List from "./pages/List";
 import Detail from "./pages/Detail";
 import Sidebar from "./Sidebar";
 import Header from "./Header";

@@ -17,3 +17,10 @@ INSERT INTO phrases (surah_id, ayah_id, text, phoneme) VALUES
 (1, 6, 'ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ', 'ʔihdɪnɑː ʔɑṣṣɪrɑːṭɑ ʔɑlmustaqiːm'),
 (1, 7, 'صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ', 'ṣɪrɑːṭɑ ʔɑllɑðɪːna ʔanʕamta ʕalɑyhim ɣajrɪ ʔɑlmɑɣðuːbi ʕalɑyhim walɑː ʔɑḍḍɑːlliːn');
 
+INSERT INTO phrases (surah_id, ayah_id, text, phoneme) VALUES
+(114, 1, 'قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ', 'qul ʔaʕuːðu birabbi ʔɑnnɑːs'),
+(114, 2, 'مَلِكِ ٱلنَّاسِ', 'maliki ʔɑnnɑːs'),
+(114, 3, 'إِلَـٰهِ ٱلنَّاسِ', 'ʔilaːhi ʔɑnnɑːs'),
+(114, 4, 'مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ', 'min ʃarri ʔalwaswaːsi ʔalxannaːs'),
+(114, 5, 'ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ', 'ʔallaði juwaswisu fɪː ṣuduːri ʔɑnnɑːs'),
+(114, 6, 'مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ', 'mina ʔaljinnati waʔɑnnɑːs');
