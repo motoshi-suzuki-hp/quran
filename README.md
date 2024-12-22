@@ -52,7 +52,9 @@ This will:
 
 ## Environment Variables
 
-Environment variables used in the `docker-compose.yml` file can be set in the `.env` file. Key variables include:
+Environment variables used in the `docker-compose.yml` file can be set in the `.env` file. 
+(I can share .env file with you, so plese contact me if you need.)
+Key variables include:
 
 1. Backend Service
 - HUGGINGFACE_TOKEN
