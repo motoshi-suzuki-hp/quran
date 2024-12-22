@@ -2,6 +2,9 @@
 
 This project is a full-stack web application designed to help users improve their Quran pronunciation. The system provides features like user authentication, audio file analysis, and results display.
 
+## Comment
+- 12/22 Only first and last Surah has already been added to the database. Even if you access to Surahs page except first and last Surah page, you cannnot find the Surah; you probably find first or last Surah.
+
 ## Project Structure
 ```
 project/ 
