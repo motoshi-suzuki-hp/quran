@@ -1,26 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import '/app/src/App.css'
-
-interface Data {
-  id: number;
-  text: string;
-  phoneme: string;
-}
-
-interface Feedback {
-  position: number;
-  expected_text: string;
-  expected_phoneme: string;
-  predicted_text: string;
-  predicted_phoneme: string;
-  similarity: number;
-  message: string;
-  audio_url: string;
-}
+import { Data, Feedback } from '../interface'
 
 const Detail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { surah_id } = useParams<{ surah_id: string }>();
+  const { ayah_id } = useParams<{ ayah_id: string }>();
   const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,7 +21,7 @@ const Detail: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5001/api/${id}`);
+        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}/${ayah_id}`);
         console.log(response);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -48,10 +33,10 @@ const Detail: React.FC = () => {
       }
     };
 
-    if (id) {
+    if (surah_id && ayah_id) {
       fetchData();
     }
-  }, [id]);
+  }, [surah_id, ayah_id]);
 
   if (error) {
     return <div>Error: {error}</div>;
