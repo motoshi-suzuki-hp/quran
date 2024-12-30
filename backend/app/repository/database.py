@@ -51,7 +51,7 @@ class DatabaseRepository:
         """
         指定されたIDのレコードを取得する。
         """
-        query = "SELECT id, text, phoneme FROM phrases WHERE surah_id = %s AND ayah_id = %s"
+        query = "SELECT id, text, phoneme, audio_path FROM phrases WHERE surah_id = %s AND ayah_id = %s"
         result = self._execute_query(query, (surah_id, ayah_id))
 
         if result:
@@ -59,9 +59,10 @@ class DatabaseRepository:
             return {
                 "id": row[0], 
                 "text": row[1], 
-                "phoneme": row[2]
+                "phoneme": row[2],
+                "audio_path": row[3]
             }
-        return None
+        return {"error": "Phrase not found"}, 404
     
     def get_records_by_surah(self, surah_id):
         """
@@ -77,7 +78,7 @@ class DatabaseRepository:
                 "text": row[2], 
                 "phoneme": row[3]
             } for row in result]
-        return None
+        return {"error": "Phrase not found"}, 404
 
     def get_records(self):
         """
@@ -94,4 +95,4 @@ class DatabaseRepository:
                 "text": row[3], 
                 "phoneme": row[4]
                 } for row in result]
-        return []
+        return {"error": "Phrase not found"}, 404

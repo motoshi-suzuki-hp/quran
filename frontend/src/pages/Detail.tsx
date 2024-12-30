@@ -110,6 +110,16 @@ const Detail: React.FC = () => {
     <div className='app-content' style={{ padding: "20px" }}>
       <h1>{data.text}</h1>
       <h2>/{data.phoneme}/</h2>
+      <div className='audio-player'>
+        {data.audio_path ? (
+            <audio controls>
+                <source src={`http://127.0.0.1:5001/media/audio/${data.audio_path}`} type="audio/wav" />
+                Your browser does not support the audio element.
+            </audio>
+        ) : (
+            <p>音声データが存在しません。</p>
+        )}
+      </div>
       <div className='record'>
         {!isRecording ? (
           <button className='record-button' onClick={startRecording}>録音開始</button>

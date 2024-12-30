@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, request, jsonify, Response
+from flask import Blueprint, request, jsonify, Response, send_from_directory
 from app.application import PronunciationAnalyzer
 from app.infrastructure import HuggingFaceModel
 from app.repository import DatabaseRepository
@@ -35,7 +35,8 @@ def get_pronunciation_record(surah_id, ayah_id):
         result = {
             "id": record["id"],
             "text": record["text"],
-            "phoneme": record["phoneme"]
+            "phoneme": record["phoneme"],
+            "audio_path": record["audio_path"]
         }
 
         return jsonify(result)
@@ -94,3 +95,18 @@ def get_all_pronunciation_records():
         
     except Exception as e:
         return jsonify({"error": "Unexpected Error", "message": str(e)}), 500
+    
+@api.route("/<int:audio_id>", methods=["GET"])
+def get_audio_metadata(audio_id):
+    db = DatabaseRepository()
+    metadata = db.get_audio_metadata_by_id(audio_id)
+
+    if not metadata:
+        return jsonify({"error": "Audio not found"}), 404
+
+    return jsonify(metadata), 200
+
+
+@api.route('/media/audio/<path:filename>', methods=["GET"])
+def serve_audio(filename):
+    return send_from_directory('media/audio', filename)
