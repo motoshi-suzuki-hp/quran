@@ -1,15 +1,12 @@
-# Quran Pronunciation Correction App
+# Arabic Pronunciation Correction App
 
-This project is a full-stack web application designed to help users improve their Quran pronunciation. The system provides features like user authentication, audio file analysis, and results display.
-
-## Comment
-- 12/22 Only first and last Surah has already been added to the database. Even if you access to Surahs page except first and last Surah page, you cannnot find the Surah; you probably find first or last Surah.
+This project is a full-stack web application designed to help users improve their Arabic pronunciation. The system provides features like user authentication, audio file analysis, and results display.
 
 ## Project Structure
 ```
 project/ 
-├── backend/ # Backend Flask application 
-├── db/ # MySQL database configuration 
+├── app/ # Backend Flask application 
+├── db/ # PostgreSQL database configuration 
 ├── frontend/ # React frontend application 
 ├── docker-compose.yml 
 ├── README.md
@@ -31,58 +28,58 @@ cd <repository-directory>
 
 ### Step 2: Build and Start the Containers
 ```
-docker-compose down --volumes                                                                       (git)-[develop]
-docker-compose build --no-cache
-docker-compose up
+docker-compose up --build
 ```
 
 This will:
 
-- Set up a MySQL database.
+- Set up a PostgreSQL database.
 - Start the Flask backend on http://localhost:5001.
 - Launch the React frontend on http://localhost:3001.
 
 ### Step 3: Access the Application
 - Frontend: http://localhost:3001
 - Backend: http://localhost:5001
-- Database: Accessible via port 3306.
+- Database: Accessible via port 5432.
 
 ## Features
 
-1. Audio Analysis:
-- Record their voice and specify the expected text.
+1. User Authentication:
+- Register and log in securely.
+2. Audio Analysis:
+- Upload an audio file and specify the expected text.
 - Receive analysis results.
 
 ## Environment Variables
 
-Environment variables used in the `docker-compose.yml` file can be set in the `.env` file. 
-(I can share .env file with you, so plese contact me if you need.)
-Key variables include:
+Environment variables can be set in the `docker-compose.yml` file. Key variables include:
 
-1. Backend Service
-- HUGGINGFACE_TOKEN
-- DB_HOST
-- DB_PORT
-- DB_USER
-- DB_PASSWORD
-- DB_NAME
-
-2. Database Service
-- MYSQL_ROOT_PASSWORD
-- MYSQL_DATABASE
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- POSTGRES_DB
+- DATABASE_URL
 
 ## Database Schema
 
-### Phrases Table
+### Users Table
 id: Unique identifier.
-text: Arbic phrase
-phoneme: IPA
+username: Unique username.
+password_hash: Hashed password.
+created_at: Timestamp of account creation.
+
+### Analysis Table
+id: Unique identifier.
+user_id: Foreign key referencing users.
+audio_path: Path to the uploaded audio file.
+expected_text: Text provided by the user.
+result: Result of the analysis.
+created_at: Timestamp of the analysis.
 
 ## Development Notes
 
 - Frontend: React application with TypeScript.
 - Backend: Flask with Python for API development.
-- Database: MySQL with schema initialization in db/init.sql, db/my.cnf.
+- Database: PostgreSQL with schema initialization in db/init/init.sql.
 
 ## Future Enhancements
 
