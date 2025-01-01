@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify, Response, send_from_directory
 from app.application import PronunciationAnalyzer
 from app.infrastructure import HuggingFaceModel
 from app.repository import DatabaseRepository
+from app.repository.user_repository import UserRepository
 
 api = Blueprint("api", __name__)
 
@@ -105,7 +106,6 @@ def get_audio_metadata(audio_id):
         return jsonify({"error": "Audio not found"}), 404
 
     return jsonify(metadata), 200
-
 
 @api.route('/media/audio/<path:filename>', methods=["GET"])
 def serve_audio(filename):

@@ -8,10 +8,12 @@ RUN apt-get update && apt-get install -y libsndfile1 ffmpeg espeak-ng \
 # アプリケーションの依存関係をインストール
 WORKDIR /app
 
-COPY requirements.txt ./
+COPY media/audio/ /app/media/audio/
+
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY backend/ /app/
 
 EXPOSE 5001
 CMD ["python", "main.py"]
