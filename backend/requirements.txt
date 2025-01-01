@@ -1,0 +1,12 @@
+Flask
+transformers==4.33.2
+phonemizer
+librosa
+soundfile
+pydub
+flask-cors
+torch
+numpy<2
+marshmallow
+mysql-connector-python
+python-dotenv

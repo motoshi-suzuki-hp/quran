@@ -1,0 +1,184 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+body {
+  margin: 0;
+}
+  
+  #root {
+    background-color: #F8F7F1;
+    min-height: 100vh;
+    
+  }
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+  
+  .app-content {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+  }
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
+  
+  .record {
+    margin-bottom: 30px;
+  }
+  
+  .record-button {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-bottom: solid 2px #c0c0c0;
+    border-radius: 50%;
+    box-shadow: inset 15px 30px 40px rgba(255, 255, 255, 0.5), 0 3px 7px rgba(0, 0, 0, .2);
+    background-image: linear-gradient(#0E3512 0%, #051b07 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1em;
+  }
+  
+  .feedback-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    margin: 0 auto;
+    padding: .9em 2em;
+    border: 1px solid #0E3512;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #0E3512;
+    font-size: 1em;
+  }
+  
+  .feedback-button:hover {
+    background-color: #0E3512;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  
+  li {
+    list-style: none;
+  }
+  
+  .feedback-table-text {
+    transform: rotate(180deg);
+  }
+  .feedback-table-text > li {
+    transform: rotate(-180deg);
+  }
+  
+  
+  .feedback-table, .feedback-table ol {
+    display: flex;
+  }
+  
+  .feedback-table-row {
+    margin-right: 10px;
+  }
+  .feedback-table-row li {
+    text-align: left;
+  }
+  
+  .feedback-table {
+    font-size: 16px;
+  }
+  
+  .feedback-table-text {
+    font-size: 18px;
+    
+  }
+  
+  
+  .feedback-table-text li {
+    margin-right: 10px;
+  }
+  
+  
+  
+  .feedback h2, .feedback h3 {
+    text-align: left;
+  }
+  
+  .feedback-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .feedback-list li {
+    margin-bottom: 10px;
+    display: flex;
+  }
+  
+  .feedback-list li strong {
+    margin-right: 20px;
+  }
+  
+  .feedback-comments {
+    text-align: left;
+    display: flex;
+  }
+  
+  .feedback-comments div:first-child {
+    margin-right: 20px;
+  }
+  
+  .feedback-comments div:last-child p {
+    height: 24px;
+  }
+  
+  .feedback-comments p {
+    margin: 0;
+  }
+  
