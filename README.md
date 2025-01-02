@@ -53,6 +53,10 @@ This will:
 - Record their voice and specify the expected text.
 - Receive analysis results.
 
+2. User Administration
+- They can sign up, login and logout.
+- They cannot access to the service if they are not logged in.
+
 ## Environment Variables
 
 Environment variables used in the `docker-compose.yml` file can be set in the `.env` file. 
@@ -71,18 +75,34 @@ Key variables include:
 - MYSQL_ROOT_PASSWORD
 - MYSQL_DATABASE
 
+3. Token
+- SECRET_KEY
+- REFRESH_SECRET_KEY
+- TOKEN_EXPIRE_HOURS
+
 ## Database Schema
 
 ### Phrases Table
 id: Unique identifier.
-text: Arbic phrase
-phoneme: IPA
+surah_id: Surah number.
+ayah_id: Ayah number.
+text: Arbic phrase.
+phoneme: IPA.
+audio_path: The path to the storage which audios are stored.
+
+
+### Users Table
+id: Unique identifier.
+username: User name.
+email: Email address.
+hashed_password: Hash of password.
+role: User or admin.
 
 ## Development Notes
 
 - Frontend: React application with TypeScript.
 - Backend: Flask with Python for API development.
-- Database: MySQL with schema initialization in db/init.sql, db/my.cnf.
+- Database: MySQL with schema initialization in db/init.sql, db/my.cnf, db/users.sql.
 
 ## Future Enhancements
 

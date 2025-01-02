@@ -21,13 +21,18 @@ const Detail: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}/${ayah_id}`);
-        console.log(response);
+        const token = localStorage.getItem("access_token");
+        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}/${ayah_id}`, {
+          headers: {
+            "Authorization": token ? `Bearer ${token}` : ""
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const result = await response.json();
         setData(result);
+        console.log(result);
       } catch (error: any) {
         setError(error.message);
       }
@@ -76,7 +81,11 @@ const Detail: React.FC = () => {
     formData.append("text", data.text);
 
     try {
+      const token = localStorage.getItem("access_token");
       const response = await fetch("http://127.0.0.1:5001/api/analyze", {
+        headers: {
+          "Authorization": token ? `Bearer ${token}` : ""
+        },
         method: "POST",
         body: formData,
       });
@@ -106,10 +115,21 @@ const Detail: React.FC = () => {
     });
   };
 
+  console.log(data.audio_path);
   return (
     <div className='app-content' style={{ padding: "20px" }}>
       <h1>{data.text}</h1>
       <h2>/{data.phoneme}/</h2>
+      <div className='audio-player'>
+        {data.audio_path ? (
+            <audio controls>
+                <source src={`http://127.0.0.1:5001/api/media/audio/${data.audio_path}`} type="audio/mp3" />
+                Your browser does not support the audio element.
+            </audio>
+        ) : (
+            <p>音声データが存在しません。</p>
+        )}
+      </div>
       <div className='record'>
         {!isRecording ? (
           <button className='record-button' onClick={startRecording}>録音開始</button>

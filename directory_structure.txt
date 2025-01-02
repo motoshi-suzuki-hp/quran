@@ -30,16 +30,13 @@ project-root/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── pages/
-│   │   │   │   └── Detail.tsx
-│   │   │   ├── App.tsx
-│   │   │   ├── Login.tsx
-│   │   │   ├── FeedbackTable.tsx
-│   │   │   └── RecordingControl.tsx
-│   │   ├── styles/
-│   │   │   ├── App.css
-│   │   │   └── login.css
+│   │   ├── pages/
+│   │   │   ├── Detail.tsx
+│   │   │   ├── Home.tsx
+│   │   │   └── List.tsx
+│   │   ├── App.tsx
+│   │   ├── Header.tsx
+│   │   ├── Sidebar.tsx
 │   │   └── index.tsx
 │   ├── tsconfig.json
 │   ├── package.json
@@ -49,6 +46,7 @@ project-root/
 │   ├── init.sql
 │   └── my.cnf
 │
+├── .env
 ├── .gitignore
 ├── docker-compose.yml
 └── README.md

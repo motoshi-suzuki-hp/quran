@@ -5,6 +5,10 @@
     text-align: left;
     font-size: 20px;
     margin: none;
+
+    display: flex;
+
+    justify-content: space-between;
 }
 
 .header h1 a {
