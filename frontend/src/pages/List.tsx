@@ -14,7 +14,12 @@ const List:React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}`);
+        const token = localStorage.getItem("access_token");
+        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}`, {
+          headers: {
+            "Authorization": token ? `Bearer ${token}` : ""
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

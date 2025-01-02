@@ -47,6 +47,26 @@ class DatabaseRepository:
                 cursor.close()
                 connection.close()
 
+    def _execute_write_query(self, query, params=None):
+        """
+        INSERT/UPDATE/DELETE 用
+        """
+        connection = self._connect()
+        if not connection:
+            return None
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query, params or ())
+            connection.commit()
+            return cursor.lastrowid  # 直近のINSERT ID取得など
+        except Error as e:
+            print(f"Database write query error: {e}")
+            return None
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+                
     def get_record_by_surah_ayah(self, surah_id, ayah_id):
         """
         指定されたIDのレコードを取得する。

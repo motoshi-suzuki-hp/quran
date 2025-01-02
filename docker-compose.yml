@@ -3,11 +3,13 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./backend/Dockerfile
     ports:
       - "5001:5001"
     volumes:
       - ./backend:/app
+      - ./media/audio:/app/media/audio
     depends_on:
       - db
     environment:
@@ -17,6 +19,9 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - SECRET_KEY=${SECRET_KEY}
+      - REFRESH_SECRET_KEY=${REFRESH_SECRET_KEY}
+      - TOKEN_EXPIRE_HOURS=${TOKEN_EXPIRE_HOURS}
 
   frontend:
     build:
@@ -40,6 +45,7 @@ services:
       - db_data:/var/lib/mysql
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/users.sql:/docker-entrypoint-initdb.d/users.sql
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=password"]
       interval: 10s
