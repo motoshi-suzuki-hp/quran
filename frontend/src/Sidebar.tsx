@@ -9,7 +9,7 @@ const Sidebar: React.FC = () => {
         <ul>
             {Array.from({ length: NumberOfSurahs }, (_, index) => (
                 <li key={index}>
-                    <Link to={`/${index + 1}`}>{Surahs[index]}</Link>
+                    <Link to={`/${index + 1}`}>{index+1}. {Surahs[index]}</Link>
                 </li>
             ))}
         </ul>
