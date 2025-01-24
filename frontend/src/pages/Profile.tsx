@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
     fetchUser();
   }, []);
 
-  const handleLogout = () => {
+  const handleProfile = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user");
@@ -65,7 +65,7 @@ const Profile: React.FC = () => {
         <p>読み込み中...</p>
       )}
       
-      <button onClick={handleLogout} style={{ marginTop: "20px" }}>
+      <button onClick={handleProfile} style={{ marginTop: "20px" }}>
         ログアウト
       </button>
     </div>
