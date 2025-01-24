@@ -45,7 +45,7 @@ class AuthManager:
         # 期限 3時間 (envから取得済み)
         exp = datetime.datetime.utcnow() + datetime.timedelta(hours=TOKEN_EXPIRE_HOURS)
         payload = {
-            "sub": user_entity.id,
+            "sub": str(user_entity.id),
             "username": user_entity.username,
             "role": user_entity.role,
             "exp": exp
@@ -57,7 +57,7 @@ class AuthManager:
         # リフレッシュトークンの有効期限はもう少し長めでもOK (例: 7日)
         exp = datetime.datetime.utcnow() + datetime.timedelta(days=7)
         payload = {
-            "sub": user_entity.id,
+            "sub": str(user_entity.id),
             "username": user_entity.username,
             "role": user_entity.role,
             "exp": exp
@@ -67,7 +67,7 @@ class AuthManager:
     @staticmethod
     def verify_access_token(token):
         try:
-            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            decoded = jwt.decode(token, SECRET_KEY, algorithms="HS256")
             return decoded
         except jwt.ExpiredSignatureError:
             return None
@@ -77,7 +77,7 @@ class AuthManager:
     @staticmethod
     def verify_refresh_token(token):
         try:
-            decoded = jwt.decode(token, REFRESH_SECRET_KEY, algorithms=["HS256"])
+            decoded = jwt.decode(token, REFRESH_SECRET_KEY, algorithms="HS256")
             return decoded
         except jwt.ExpiredSignatureError:
             return None
