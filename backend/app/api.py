@@ -110,3 +110,7 @@ def get_audio_metadata(audio_id):
 @api.route('/media/audio/<path:filename>', methods=["GET"])
 def serve_audio(filename):
     return send_from_directory('media/audio', filename)
+
+@api.route('/media/yours/<path:filename>', methods=["GET"])
+def serve_your_audio(filename):
+    return send_from_directory('media/yours', filename)

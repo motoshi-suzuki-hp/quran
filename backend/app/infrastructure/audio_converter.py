@@ -5,7 +5,7 @@ class AudioConverter:
     @staticmethod
     def convert_to_wav(audio_file) -> str:
         temp_webm_path = "temp_audio.webm"
-        temp_wav_path = "temp_audio.wav"
+        temp_wav_path = "./media/yours/temp_audio.wav"
         
         audio_file.save(temp_webm_path)
 

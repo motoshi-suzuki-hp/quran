@@ -142,7 +142,7 @@ def analyze():
     # 必要に応じてwebmをwav形式に変換
     try:
         sound = AudioSegment.from_file(temp_webm_path, format="webm")
-        temp_wav_path = "temp_audio.wav"
+        temp_wav_path = "./media/yours/temp_audio.wav"
         sound.export(temp_wav_path, format="wav")
         print(f"Converted audio saved to {temp_wav_path}")
     except Exception as e:

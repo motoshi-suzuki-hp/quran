@@ -167,6 +167,10 @@ const Detail: React.FC = () => {
 
             {feedback.length > 0 && (
               <div style={{ marginTop: "10px" }}>
+                <audio controls>
+                    <source src={`http://127.0.0.1:5001/api/media/yours/temp_audio.wav`} type="audio/wav" />
+                    Your browser does not support the audio element.
+                </audio>
                 <h3>改善が必要な箇所:</h3>
                 <ul className='feedback-list'>
                   {feedback.map((item, index) => (
