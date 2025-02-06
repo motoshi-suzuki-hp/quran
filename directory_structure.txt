@@ -5,28 +5,35 @@ project-root/
 │   ├── app
 │   │   ├── __init__.py
 │   │   ├── api.py
+│   │   ├── auth_api.py
 │   │   ├── application
 │   │   │   ├── __init__.py
+│   │   │   ├── auth_manager.py
 │   │   │   └── pronunciation_analyzer.py
+│   │   │   └── user_service.py
 │   │   ├── domain
 │   │   │   ├── __init__.py
 │   │   │   ├── evaluation_service.py
-│   │   │   └── exceptions.py
+│   │   │   ├── exceptions.py
+│   │   │   ├── user_service.py
+│   │   │   └── user.py
 │   │   ├── infrastructure
 │   │   │   ├── __init__.py
 │   │   │   ├── audio_converter.py
+│   │   │   ├── bycrypt_helper.py
 │   │   │   └── huggingface_model.py
 │   │   ├── interface
 │   │   │   ├── __init__.py
+│   │   │   ├── auth_schema.py
 │   │   │   └── schema.py
 │   │   └── repository
 │   │       ├── __init__.py
-│   │       └── database.py
+│   │       ├── database.py
+│   │       └── user_repository.py
 │   ├── app.py
 │   ├── main.py
 │   ├── requirements.txt
 │   ├── setup_database.py
-│   └── temp_audio.wav
 │
 ├── frontend/
 │   ├── src/
