@@ -1,2 +1,6 @@
-from . import api
-from . import auth_api
+# app/__init__.py
+
+from .application import *
+from .domain import *
+from .infrastructure import *
+from .interface import *

@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from marshmallow import ValidationError
-from app.interface.auth_schema import (
+from interface.schemas.auth_schema import (
     SignupRequestSchema,
     SignupResponseSchema,
     LoginRequestSchema,
@@ -8,19 +8,20 @@ from app.interface.auth_schema import (
     RefreshRequestSchema,
     MeResponseSchema
 )
-from app.application.auth_manager import AuthManager
-from app.repository.user_repository import UserRepository
-from app.domain.user_service import UserService
+from application.auth_service import AuthService
+from infrastructure.persistence.user_repository import UserRepository
+from domain.services.user_service import UserService
+from interface.http.decorators import token_required
 
-auth = Blueprint("auth", __name__)
+auth_blueprint = Blueprint("auth", __name__)
 
-@auth.route("/signup", methods=["POST"])
+@auth_blueprint.route("/signup", methods=["POST"])
 def signup():
     try:
         data = request.get_json()
         validated_data = SignupRequestSchema().load(data)
         
-        user_id = AuthManager.signup(
+        user_id = AuthService.signup(
             username=validated_data["username"],
             email=validated_data["email"],
             plain_password=validated_data["password"],
@@ -40,16 +41,14 @@ def signup():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@auth.route("/login", methods=["POST"])
+@auth_blueprint.route("/login", methods=["POST"])
 def login():
     try:
         data = request.get_json()
         validated_data = LoginRequestSchema().load(data)
-
         email = validated_data["email"]
         password = validated_data["password"]
-
-        (user, access_token, refresh_token), error = AuthManager.login(email, password)
+        (user, access_token, refresh_token), error = AuthService.login(email, password)
         if error:
             return jsonify({"error": error}), 401
         
@@ -71,12 +70,12 @@ def login():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@auth.route("/refresh", methods=["POST"])
+@auth_blueprint.route("/refresh", methods=["POST"])
 def refresh():
     try:
         data = request.get_json()
         validated_data = RefreshRequestSchema().load(data)
-        new_access_token = AuthManager.refresh_token(validated_data["refresh_token"])
+        new_access_token = AuthService.refresh_token(validated_data["refresh_token"])
         if not new_access_token:
             return jsonify({"error": "Invalid or expired refresh token"}), 401
         return jsonify({"access_token": new_access_token}), 200
@@ -85,31 +84,16 @@ def refresh():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@auth.route("/me", methods=["GET"])
+@auth_blueprint.route("/me", methods=["GET"])
+@token_required
 def me():
-    """
-    ヘッダー "Authorization: Bearer <ACCESS_TOKEN>" からユーザー情報を取得。
-    """
-    auth_header = request.headers.get("Authorization", None)
-    if not auth_header:
-        return jsonify({"error": "Missing Authorization Header"}), 401
-    
-    parts = auth_header.split()
-    if len(parts) != 2 or parts[0] != "Bearer":
-        return jsonify({"error": "Invalid Authorization header format"}), 401
-    
-    token = parts[1]
-    decoded = AuthManager.verify_access_token(token)
-    if not decoded:
-        return jsonify({"error": "Invalid or expired token"}), 401
-    
-    # DBからユーザー情報を再取得 (token内のusername or idを利用)
+    # token_required で認証済みなら、g.user_payload にデコード済みの情報が格納されている
+    user_payload = g.user_payload
     user_repo = UserRepository()
-    record_dict = user_repo.get_user_by_id(decoded["sub"])
+    record_dict = user_repo.get_user_by_id(user_payload["sub"])
     if not record_dict:
         return jsonify({"error": "User not found"}), 404
     user_entity = UserService.create_user_entity(record_dict)
-
     res_data = MeResponseSchema().dump({
         "id": user_entity.id,
         "username": user_entity.username,

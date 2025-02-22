@@ -1,4 +1,13 @@
-# app/domain/__init__.py
+# app/infrastructure/__init__.py
 
-from .schema import AnalyzeResponseSchema
-from .auth_schema import SignupRequestSchema, SignupResponseSchema, LoginRequestSchema, LoginResponseSchema, MeResponseSchema, RefreshRequestSchema
+from .http.api import api_blueprint
+from .http.auth_api import auth_blueprint
+from .schemas.auth_schema import (
+    SignupRequestSchema,
+    LoginRequestSchema,
+    RefreshRequestSchema,
+    SignupResponseSchema,
+    LoginResponseSchema,
+    MeResponseSchema
+)
+from .schemas.analysis_schema import AnalyzeRequestSchema, AnalyzeResponseSchema

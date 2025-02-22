@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_API_URL } from '../const';
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
@@ -8,13 +9,13 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem("access_token");
+      const token = sessionStorage.getItem("access_token");
       if (!token) {
         setError("トークンがありません。ログインしてください。");
         return;
       }
       try {
-        const response = await fetch("http://127.0.0.1:5001/auth/me", {
+        const response = await fetch(`${AUTH_API_URL}/me`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`
@@ -35,9 +36,9 @@ const Profile: React.FC = () => {
   }, []);
 
   const handleProfile = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("user");
     navigate("/login");
   };
 

@@ -1,10 +1,4 @@
-import mysql.connector
-import os
-from dotenv import load_dotenv
-from mysql.connector import Error
-from app.repository.database import DatabaseRepository  # 既存のDatabaseRepositoryを継承 or 再利用
-
-load_dotenv()
+from infrastructure.persistence.database import DatabaseRepository
 
 class UserRepository(DatabaseRepository):
     def create_user(self, username, email, hashed_password, role='user'):

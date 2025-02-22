@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_API_URL } from '../const';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:5001/auth/signup", {
+      const response = await fetch(`${AUTH_API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -45,7 +46,7 @@ const Signup: React.FC = () => {
       console.log("Signup result:", result);
 
       setSuccessMessage("ユーザー登録が完了しました。ログインしてください。");
-        navigate(`/login`);
+      navigate(`/login`);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "ユーザー登録に失敗しました");

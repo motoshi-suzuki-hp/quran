@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y libsndfile1 ffmpeg espeak-ng \
 WORKDIR /app
 
 COPY media/audio/ /app/media/audio/
+COPY backend/models/ /app/models/
 
 COPY backend/requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
@@ -16,4 +17,4 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 COPY backend/ /app/
 
 EXPOSE 5001
-CMD ["python", "main.py"]
+CMD ["python", "app/main.py"]

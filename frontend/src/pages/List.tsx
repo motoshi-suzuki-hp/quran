@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import '/app/src/App.css'
 import { Data } from '../interface'
 import { Surahs } from '../const'
+import { API_URL } from '../const';
 
 const List:React.FC = () => {
   const { surah_id } = useParams<{ surah_id: string }>();
@@ -14,8 +15,8 @@ const List:React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("access_token");
-        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}`, {
+        const token = sessionStorage.getItem("access_token");
+        const response = await fetch(`${API_URL}/${surah_id}`, {
           headers: {
             "Authorization": token ? `Bearer ${token}` : ""
           },
