@@ -5,6 +5,7 @@ class AnalyzeRequestSchema(Schema):
     text = fields.String(required=True, description="期待されるテキスト")
 
 class AnalyzeResponseSchema(Schema):
+    user_id = fields.Integer(required=True)
     recognized_text = fields.String(required=True)
     predicted_phonemes = fields.List(fields.String, required=True)
     expected_text = fields.String(required=True)

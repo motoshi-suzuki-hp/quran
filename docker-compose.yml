@@ -13,7 +13,6 @@ services:
     depends_on:
       - db
     environment:
-      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
@@ -25,7 +24,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: .
     ports:
       - "3001:3000"
     volumes:

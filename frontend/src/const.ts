@@ -1,6 +1,9 @@
+export const API_URL: string = "http://localhost:5001/api";
+export const AUTH_API_URL: string = "http://localhost:5001/auth";
+
 export const Surahs: string[] = [
     "Al-Fatihah",
-    // "Al-Baqarah",
+    "Al-Baqarah",
     // "Aal-E-Imran",
     // "An-Nisa",
     // "Al-Maidah",
@@ -114,6 +117,5 @@ export const Surahs: string[] = [
     // "Al-Falaq",
     // "An-Nas"
 ];
-
 
 export const NumberOfSurahs: number = Math.min(Surahs.length, 114);

@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '/app/src/App.css'
 import { Data, Feedback } from '../interface'
+import { API_URL } from '../const'
 
 const Detail: React.FC = () => {
+  const navigate = useNavigate();
+
   const { surah_id } = useParams<{ surah_id: string }>();
   const { ayah_id } = useParams<{ ayah_id: string }>();
   const [data, setData] = useState<Data | null>(null);
@@ -14,6 +17,7 @@ const Detail: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
+  const [userId, setUserId] = useState<Number>(0);
   const [expectedText, setExpectedText] = useState<string>("");
   const [recognizedText, setRecognizedText] = useState<string>("");
   const [feedback, setFeedback] = useState<Feedback[]>([]);
@@ -21,13 +25,17 @@ const Detail: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("access_token");
-        const response = await fetch(`http://127.0.0.1:5001/api/${surah_id}/${ayah_id}`, {
+        const token = sessionStorage.getItem("access_token");
+        const response = await fetch(`${API_URL}/${surah_id}/${ayah_id}`, {
           headers: {
             "Authorization": token ? `Bearer ${token}` : ""
           },
         });
-        if (!response.ok) {
+        console.log(response);
+        if (response.status === 401) {
+          alert("ログインし直してください。");
+          navigate(`/${surah_id}`);
+        } else if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const result = await response.json();
@@ -69,20 +77,24 @@ const Detail: React.FC = () => {
     setIsRecording(false);
   };
 
+
   const handleSubmit = async () => {
     if (!audioBlob) {
       alert("音声を録音してください。");
       return;
     }
 
+
     setIsLoading(true);
     const formData = new FormData();
     formData.append("audio", audioBlob, "recording.wav");
     formData.append("text", data.text);
+    formData.append("surah_id", surah_id ? surah_id : "None");
+    formData.append("ayah_id", ayah_id ? ayah_id : "None");
 
     try {
-      const token = localStorage.getItem("access_token");
-      const response = await fetch("http://127.0.0.1:5001/api/analyze", {
+      const token = sessionStorage.getItem("access_token");
+      const response = await fetch(`${API_URL}/analyze`, {
         headers: {
           "Authorization": token ? `Bearer ${token}` : ""
         },
@@ -92,6 +104,7 @@ const Detail: React.FC = () => {
       const result = await response.json();
       console.log(result);
       // 結果の処理をここに記載
+      setUserId(result.user_id);
       setExpectedText(result.expected_text);
       setRecognizedText(result.recognized_text);
       setFeedback(result.feedback);  
@@ -115,20 +128,17 @@ const Detail: React.FC = () => {
     });
   };
 
-  console.log(data.audio_path);
+  const audio_path = String(surah_id).padStart(3, '0') + String(ayah_id).padStart(3, '0');
+
   return (
     <div className='app-content' style={{ padding: "20px" }}>
       <h1>{data.text}</h1>
       <h2>/{data.phoneme}/</h2>
       <div className='audio-player'>
-        {data.audio_path ? (
-            <audio controls>
-                <source src={`http://127.0.0.1:5001/api/media/audio/${data.audio_path}`} type="audio/mp3" />
-                Your browser does not support the audio element.
-            </audio>
-        ) : (
-            <p>音声データが存在しません。</p>
-        )}
+        <audio controls>
+          <source src={`${API_URL}/media/audio/${audio_path}.mp3`} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
       <div className='record'>
         {!isRecording ? (
@@ -168,7 +178,7 @@ const Detail: React.FC = () => {
             {feedback.length > 0 && (
               <div style={{ marginTop: "10px" }}>
                 <audio controls>
-                    <source src={`http://127.0.0.1:5001/api/media/yours/temp_audio.wav`} type="audio/wav" />
+                    <source src={`${API_URL}/media/yours/temp_audio_${userId}.wav`} type="audio/wav" />
                     Your browser does not support the audio element.
                 </audio>
                 <h3>改善が必要な箇所:</h3>

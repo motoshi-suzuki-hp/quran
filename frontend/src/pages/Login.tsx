@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_API_URL } from '../const';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:5001/auth/login", {
+      const response = await fetch(`${AUTH_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,11 +34,11 @@ const Login: React.FC = () => {
       console.log("Login result:", result);
 
       // アクセストークンとリフレッシュトークンをローカルストレージに保存
-      localStorage.setItem("access_token", result.access_token);
-      localStorage.setItem("refresh_token", result.refresh_token);
+      sessionStorage.setItem("access_token", result.access_token);
+      sessionStorage.setItem("refresh_token", result.refresh_token);
 
       // 必要ならユーザー情報も保存
-      localStorage.setItem("user", JSON.stringify(result.user));
+      // sessionStorage.setItem("user", JSON.stringify(result.user));
 
       // ログイン成功後、トップページやプロフィールページへ遷移
       navigate("/");

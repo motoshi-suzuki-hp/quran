@@ -4,7 +4,6 @@ export interface Data {
     ayah_id: number;
     text: string;
     phoneme: string;
-    audio_path: string;
 }
 
 export interface Feedback {

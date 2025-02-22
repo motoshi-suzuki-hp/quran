@@ -64,7 +64,6 @@ Environment variables used in the `docker-compose.yml` file can be set in the `.
 Key variables include:
 
 1. Backend Service
-- HUGGINGFACE_TOKEN
 - DB_HOST
 - DB_PORT
 - DB_USER
@@ -88,8 +87,6 @@ surah_id: Surah number.
 ayah_id: Ayah number.
 text: Arbic phrase.
 phoneme: IPA.
-audio_path: The path to the storage which audios are stored.
-
 
 ### Users Table
 id: Unique identifier.

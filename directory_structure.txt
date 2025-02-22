@@ -4,45 +4,101 @@ project-root/
 │   ├── Dockerfile
 │   ├── app
 │   │   ├── __init__.py
-│   │   ├── api.py
-│   │   ├── auth_api.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── api.cpython-39.pyc
+│   │   │   ├── auth_api.cpython-39.pyc
+│   │   │   └── config.cpython-39.pyc
 │   │   ├── application
 │   │   │   ├── __init__.py
-│   │   │   ├── auth_manager.py
-│   │   │   └── pronunciation_analyzer.py
-│   │   │   └── user_service.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-39.pyc
+│   │   │   │   ├── analysis_service.cpython-39.pyc
+│   │   │   │   └── auth_service.cpython-39.pyc
+│   │   │   ├── analysis_service.py
+│   │   │   └── auth_service.py
+│   │   ├── config.py
 │   │   ├── domain
 │   │   │   ├── __init__.py
-│   │   │   ├── evaluation_service.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-39.pyc
+│   │   │   │   ├── evaluation_service.cpython-39.pyc
+│   │   │   │   ├── exceptions.cpython-39.pyc
+│   │   │   │   ├── user.cpython-39.pyc
+│   │   │   │   └── user_service.cpython-39.pyc
 │   │   │   ├── exceptions.py
-│   │   │   ├── user_service.py
-│   │   │   └── user.py
+│   │   │   ├── models
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── phrase.cpython-39.pyc
+│   │   │   │   │   └── user.cpython-39.pyc
+│   │   │   │   ├── phrase.py
+│   │   │   │   └── user.py
+│   │   │   └── services
+│   │   │       ├── __pycache__
+│   │   │       │   ├── evaluation.cpython-39.pyc
+│   │   │       │   └── user_service.cpython-39.pyc
+│   │   │       ├── evaluation.py
+│   │   │       └── user_service.py
 │   │   ├── infrastructure
 │   │   │   ├── __init__.py
-│   │   │   ├── audio_converter.py
-│   │   │   ├── bycrypt_helper.py
-│   │   │   └── huggingface_model.py
+│   │   │   ├── __pycache__
+│   │   │   │   └── __init__.cpython-39.pyc
+│   │   │   ├── persistence
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── database.cpython-39.pyc
+│   │   │   │   │   └── user_repository.cpython-39.pyc
+│   │   │   │   ├── database.py
+│   │   │   │   └── user_repository.py
+│   │   │   └── services
+│   │   │       ├── __pycache__
+│   │   │       │   ├── audio_converter.cpython-39.pyc
+│   │   │       │   ├── bcrypt_helper.cpython-39.pyc
+│   │   │       │   └── huggingface_model.cpython-39.pyc
+│   │   │       ├── audio_converter.py
+│   │   │       ├── bcrypt_helper.py
+│   │   │       └── huggingface_model.py
 │   │   ├── interface
 │   │   │   ├── __init__.py
-│   │   │   ├── auth_schema.py
-│   │   │   └── schema.py
-│   │   └── repository
-│   │       ├── __init__.py
-│   │       ├── database.py
-│   │       └── user_repository.py
-│   ├── app.py
-│   ├── main.py
-│   ├── requirements.txt
-│   ├── setup_database.py
+│   │   │   ├── __pycache__
+│   │   │   │   └── __init__.cpython-39.pyc
+│   │   │   ├── http
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── api.cpython-39.pyc
+│   │   │   │   │   ├── auth_api.cpython-39.pyc
+│   │   │   │   │   └── decorators.cpython-39.pyc
+│   │   │   │   ├── api.py
+│   │   │   │   ├── auth_api.py
+│   │   │   │   └── decorators.py
+│   │   │   └── schemas
+│   │   │       ├── __pycache__
+│   │   │       │   ├── analysis_schema.cpython-39.pyc
+│   │   │       │   └── auth_schema.cpython-39.pyc
+│   │   │       ├── analysis_schema.py
+│   │   │       └── auth_schema.py
+│   │   └── main.py
+│   ├── media/
+│   │   └── yours/
+│   │       └── 250208060809_1_1_1.wav
+│   ├── models/
+│   │   └── wav2vec2-large-xlsr-53-arabic/
+│   │       └── pytorch_model.bin
+│   └── requirements.txt
 │
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/
 │   │   │   ├── Detail.tsx
 │   │   │   ├── Home.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── PrivateRoute.tsx
+│   │   │   ├── Profile.tsx
+│   │   │   ├── Signup.tsx
 │   │   │   └── List.tsx
 │   │   ├── App.tsx
+│   │   ├── const.ts
 │   │   ├── Header.tsx
+│   │   ├── LoginButton.tsx
+│   │   ├── ProfileButton.tsx
 │   │   ├── Sidebar.tsx
 │   │   └── index.tsx
 │   ├── tsconfig.json
@@ -51,7 +107,16 @@ project-root/
 │
 ├── db/
 │   ├── init.sql
+│   ├── users.sql
 │   └── my.cnf
+│
+├── media/
+│   └── audio/
+│       ├── 001001.mp3
+│       ├── 001002.mp3
+│       ├── 001003.mp3
+│       ├── 002001.mp3
+│       └── 002002.mp3
 │
 ├── .env
 ├── .gitignore

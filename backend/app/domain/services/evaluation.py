@@ -8,7 +8,7 @@ class EvaluationService:
 
     @staticmethod
     def grab_gestalt(word1: str, word2: str) -> float:
-        return round(difflib.SequenceMatcher(None, word1, word2).ratio()*100)
+        return round(difflib.SequenceMatcher(None, word1, word2).ratio() * 100)
 
     @staticmethod
     def evaluate_pronunciation(predicted_phonemes, expected_phonemes, predicted_text, expected_text):
@@ -25,4 +25,3 @@ class EvaluationService:
             }
             feedback.append(feedback_item)
         return feedback
-    

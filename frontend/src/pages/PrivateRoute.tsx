@@ -9,7 +9,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const location = useLocation();
 
   // ローカルストレージにあるトークンをチェック
-  const accessToken = localStorage.getItem("access_token");
+  const accessToken = sessionStorage.getItem("access_token");
 
   // もしトークンが無い or 空文字なら、ログインページへリダイレクト
   if (!accessToken) {

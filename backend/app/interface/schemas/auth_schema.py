@@ -4,7 +4,7 @@ class SignupRequestSchema(Schema):
     username = fields.String(required=True)
     email = fields.Email(required=True)
     password = fields.String(required=True)
-    role = fields.String(required=False)  # デフォルト 'user'、管理者登録の場合 'admin'
+    role = fields.String(required=False)
 
 class LoginRequestSchema(Schema):
     email = fields.Email(required=True)

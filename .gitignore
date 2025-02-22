@@ -3,3 +3,6 @@
 .DS_Store
 .env
 prompt.md
+.venv
+/backend/models/
+/backend/media/yours/**

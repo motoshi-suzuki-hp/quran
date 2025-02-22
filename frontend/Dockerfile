@@ -2,9 +2,9 @@ FROM node:16
 
 WORKDIR /app
 
-COPY package.json package-lock.json tsconfig.json ./
-COPY public/ public/
-COPY src/ src/
+COPY frontend/package.json frontend/package-lock.json frontend/tsconfig.json ./
+COPY frontend/public/ public/
+COPY frontend/src/ src/
 
 RUN npm install
 
