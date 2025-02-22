@@ -1,3 +1,5 @@
+SET NAMES 'utf8mb4';
+
 -- Create phrases table
 CREATE TABLE IF NOT EXISTS phrases (
   id INT AUTO_INCREMENT PRIMARY KEY,
