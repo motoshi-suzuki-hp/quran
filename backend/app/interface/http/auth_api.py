@@ -25,6 +25,9 @@ def signup():
             username=validated_data["username"],
             email=validated_data["email"],
             plain_password=validated_data["password"],
+            first_language=validated_data["first_language"],
+            second_language=validated_data["second_language"],
+            third_language=validated_data["third_language"],
             role=validated_data.get("role", "user")
         )
         if not user_id:
@@ -98,6 +101,9 @@ def me():
         "id": user_entity.id,
         "username": user_entity.username,
         "email": user_entity.email,
+        "first_language": user_entity.first_language,
+        "second_language": user_entity.second_language,
+        "third_language": user_entity.third_language,
         "role": user_entity.role,
     })
     return jsonify(res_data), 200

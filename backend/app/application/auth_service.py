@@ -7,10 +7,10 @@ from config import Config
 
 class AuthService:
     @staticmethod
-    def signup(username: str, email: str, plain_password: str, role: str = "user"):
+    def signup(username: str, email: str, plain_password: str, first_language: str, second_language: str, third_language: str, role: str = "user"):
         hashed_password = BcryptHelper.hash_password(plain_password)
         user_repo = UserRepository()
-        user_id = user_repo.create_user(username, email, hashed_password, role)
+        user_id = user_repo.create_user(username, email, hashed_password, first_language, second_language, third_language, role)
         return user_id
 
     @staticmethod
