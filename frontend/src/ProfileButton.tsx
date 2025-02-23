@@ -5,15 +5,19 @@ import { useNavigate } from "react-router-dom";
 const ProfileButton: React.FC = () => {
   const navigate = useNavigate();
 
+  const token = sessionStorage.getItem("access_token");
+
   const handleProfile = () => {
     navigate("/profile");
   };
 
-  return (
-      <button onClick={handleProfile}>
-        Profile
-      </button>
-  );
+  if (token) {
+    return (
+        <button onClick={handleProfile}>
+          Profile
+        </button>
+    );
+  };
 };
 
 export default ProfileButton;

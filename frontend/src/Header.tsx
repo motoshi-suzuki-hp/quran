@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoutButton from "./LogoutButton"
+import LoginLogoutButton from "./LoginLogoutButton"
 import ProfileButton from "./ProfileButton"
 import "./header.css";
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         <Link to="/">Quran.ai</Link>
       </h1>
       <div>
-        <LogoutButton />
+        <LoginLogoutButton />
         <ProfileButton />
       </div>
     </header>

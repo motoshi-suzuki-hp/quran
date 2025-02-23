@@ -68,10 +68,6 @@ const Profile: React.FC = () => {
       ) : (
         <p>読み込み中...</p>
       )}
-      
-      <button onClick={handleProfile} style={{ marginTop: "20px" }}>
-        ログアウト
-      </button>
     </div>
   );
 };

@@ -76,7 +76,7 @@ const Login: React.FC = () => {
       </form>
 
       <p style={{ marginTop: "10px" }}>
-        アカウントをお持ちでないですか？{" "}
+        アカウントをお持ちでないですか？{" "}<br />
         <span
           style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
           onClick={() => navigate("/signup")}

@@ -1,9 +1,51 @@
+.sidebar-container {
+  position: relative;
+}
+
+/* PC向けの通常のサイドバー */
 .sidebar {
   width: 250px;
   background-color: #F8F7F1;
   padding: 20px;
   overflow-y: auto;
 }
+
+/* トグルボタンはPCでは非表示 */
+.sidebar-toggle {
+  display: none;
+}
+
+/* スマホ向けの設定 */
+@media (max-width: 768px) {
+  /* トグルボタンの表示 */
+  .sidebar-toggle {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #F8F7F1;
+    border: none;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  /* サイドバーは初期状態では隠す */
+  .sidebar {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  /* 開いたときのスタイル */
+  .sidebar.open {
+    max-height: 300px;  /* 必要に応じて高さを調整 */
+    transition: max-height 0.3s ease-in;
+  }
+}
+
+
+
   
 .sidebar ul {
   list-style-type: none;
