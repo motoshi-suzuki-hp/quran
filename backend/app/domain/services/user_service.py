@@ -10,6 +10,9 @@ class UserService:
             username=record_dict["username"],
             email=record_dict["email"],
             hashed_password=record_dict["hashed_password"],
+            first_language=record_dict["first_language"],
+            second_language=record_dict["second_language"],
+            third_language=record_dict["third_language"],
             role=record_dict["role"],
             created_at=record_dict.get("created_at"),
             updated_at=record_dict.get("updated_at")
