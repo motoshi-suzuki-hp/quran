@@ -29,8 +29,6 @@ services:
       - "3001:3000"
     volumes:
       - ./frontend:/app
-    environment:
-      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
     stdin_open: true
     tty: true
 
@@ -41,8 +39,6 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - db_data:/var/lib/mysql

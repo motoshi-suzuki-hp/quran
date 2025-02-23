@@ -1,16 +1,5 @@
-import ISO6391 from 'iso-639-1';
-
-export const API_URL: string = process.env.REACT_APP_BACKEND_URL + "/api";
-export const AUTH_API_URL: string = process.env.REACT_APP_BACKEND_URL + "/auth";
-
-// ISO6391からすべての言語コードを取得し、オプション形式に変換
-export const LANGUAGE = [
-  { value: '', label: '選択してください' },
-  ...ISO6391.getAllCodes().map(code => ({
-    value: ISO6391.getName(code),
-    label: ISO6391.getNativeName(code) || ISO6391.getName(code)
-  }))
-];
+export const API_URL: string = "http://localhost:5001/api";
+export const AUTH_API_URL: string = "http://localhost:5001/auth";
 
 export const Surahs: string[] = [
     "Al-Fatihah",
