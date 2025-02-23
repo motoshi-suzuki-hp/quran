@@ -1,16 +1,16 @@
 from infrastructure.persistence.database import DatabaseRepository
 
 class UserRepository(DatabaseRepository):
-    def create_user(self, username, email, hashed_password, first_language, second_language, third_language, role='user'):
+    def create_user(self, username, email, hashed_password, role='user'):
         query = """
-            INSERT INTO users (username, email, hashed_password, first_language, second_language, third_language, role)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO users (username, email, hashed_password, role)
+            VALUES (%s, %s, %s, %s)
         """
-        return self._execute_write_query(query, (username, email, hashed_password, first_language, second_language, third_language, role))
+        return self._execute_write_query(query, (username, email, hashed_password, role))
     
     def get_user_by_email(self, email):
         query = """
-            SELECT id, username, email, hashed_password, first_language, second_language, third_language, role, created_at, updated_at
+            SELECT id, username, email, hashed_password, role, created_at, updated_at
             FROM users WHERE email = %s
         """
         result = self._execute_query(query, (email,))
@@ -21,18 +21,15 @@ class UserRepository(DatabaseRepository):
                 "username": row[1],
                 "email": row[2],
                 "hashed_password": row[3],
-                "first_language": row[4],
-                "second_language": row[5],
-                "third_language": row[6],
-                "role": row[7],
-                "created_at": row[8],
-                "updated_at": row[9],
+                "role": row[4],
+                "created_at": row[5],
+                "updated_at": row[6],
             }
         return None
     
     def get_user_by_id(self, user_id):
         query = """
-            SELECT id, username, email, hashed_password, first_language, second_language, third_language, role, created_at, updated_at
+            SELECT id, username, email, hashed_password, role, created_at, updated_at
             FROM users WHERE id = %s
         """
         result = self._execute_query(query, (user_id,))
@@ -43,11 +40,8 @@ class UserRepository(DatabaseRepository):
                 "username": row[1],
                 "email": row[2],
                 "hashed_password": row[3],
-                "first_language": row[4],
-                "second_language": row[5],
-                "third_language": row[6],
-                "role": row[7],
-                "created_at": row[8],
-                "updated_at": row[9],
+                "role": row[4],
+                "created_at": row[5],
+                "updated_at": row[6],
             }
         return None
