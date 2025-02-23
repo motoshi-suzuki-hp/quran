@@ -4,6 +4,9 @@ class SignupRequestSchema(Schema):
     username = fields.String(required=True)
     email = fields.Email(required=True)
     password = fields.String(required=True)
+    first_language = fields.String(required=True)
+    second_language = fields.String(required=False)
+    third_language = fields.String(required=False)
     role = fields.String(required=False)
 
 class LoginRequestSchema(Schema):
@@ -26,4 +29,7 @@ class MeResponseSchema(Schema):
     id = fields.Integer()
     username = fields.String()
     email = fields.Email()
+    first_language = fields.String()
+    second_language = fields.String()
+    third_language = fields.String()
     role = fields.String()

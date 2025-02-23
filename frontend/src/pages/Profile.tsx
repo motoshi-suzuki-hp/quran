@@ -61,6 +61,9 @@ const Profile: React.FC = () => {
           <p><strong>Username:</strong> {user.username}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Role:</strong> {user.role}</p>
+          <p><strong>First Language:</strong> {user.first_language}</p>
+          <p><strong>Second Language:</strong> {user.second_language ? user.second_language : "None"}</p>
+          <p><strong>Third Language:</strong> {user.third_language ? user.third_language : "None"}</p>
         </div>
       ) : (
         <p>読み込み中...</p>

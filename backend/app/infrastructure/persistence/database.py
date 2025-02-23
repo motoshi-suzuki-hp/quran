@@ -15,10 +15,29 @@ class DatabaseRepository:
 
     def _connect(self):
         try:
-            return mysql.connector.connect(**self.connection_config)
+            if Config.DB_HOST.startswith("/cloudsql/"):
+                # UNIX ソケット経由の場合
+                return mysql.connector.connect(
+                    user=Config.DB_USER,
+                    password=Config.DB_PASSWORD,
+                    database=Config.DB_NAME,
+                    unix_socket=Config.DB_HOST,
+                    charset="utf8mb4"
+                )
+            else:
+                # 通常の TCP 接続の場合
+                return mysql.connector.connect(
+                    host=Config.DB_HOST,
+                    port=Config.DB_PORT,
+                    user=Config.DB_USER,
+                    password=Config.DB_PASSWORD,
+                    database=Config.DB_NAME,
+                    charset="utf8mb4"
+                )
         except Error as e:
             print(f"Database connection error: {e}")
             return None
+
 
     def _execute_query(self, query, params=None):
         connection = self._connect()
