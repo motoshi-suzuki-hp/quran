@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS phrases (
   phoneme TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
--- Insert initial data
+-- Insert surah 1 (Al-Fatihah) data (ChatGPT)
 INSERT INTO phrases (surah_id, ayah_id, text, phoneme) VALUES
 (1, 1, 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ', 'bɪsmɪ llɑːhɪ rrɑħmɑːnɪ rrɑħiːm'),
 (1, 2, 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', 'ʔalħamdu lillɑːhi rabbɪ ʔalʕɑːlɑmiːn'),
@@ -19,10 +19,12 @@ INSERT INTO phrases (surah_id, ayah_id, text, phoneme) VALUES
 (1, 6, 'ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ', 'ʔihdɪnɑː ʔɑṣṣɪrɑːṭɑ ʔɑlmustaqiːm'),
 (1, 7, 'صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ', 'ṣɪrɑːṭɑ ʔɑllɑðɪːna ʔanʕamta ʕalɑyhim ɣajrɪ ʔɑlmɑɣðuːbi ʕalɑyhim walɑː ʔɑḍḍɑːlliːn');
 
--- Insert surah 2 (Al-Baqarah) data
+-- Insert surah 1 (Al-Fatihah) data (recognition & phonemizer)
 INSERT INTO phrases (surah_id, ayah_id, text, phoneme) VALUES
-(2, 1, 'الم', 'ʔalm'),
-(2, 2, 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ', 'ðɑːlikɑː ʔalkitɑːbu lɑː rayba fīhɪ hudan lil-muttaqīn'),
-(2, 3, 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ', 'ʔallɑðɪːna juʔminuːna bilɣajbi wa yuqimuːna ṣ-ṣalɑːta wa mimmɑː razaqnāhum yunfiqūn'),
-(2, 4, 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ', 'wa ʔallɑðɪːna yuʔminuːna bimɑː unzila ʔilajka wa mɑː unzila min qablika wa bilʔɑːxiɾati hum yuwaqinūn'),
-(2, 5, 'أُو۟لَٰٓئِكَ عَلَىٰ هُدًى مِن رَّبِّهِمْ ۖ وَأُو۟لَٰٓئِكَ هُمُ الْمُفْلِحُونَ', 'ʔulɑːʔika ʕalɑː hudan min rabbihim wa ʔulɑːʔika humul mufliħūn');
+(2, 1, 'بسم الله الرحمن الرحيم', 'bismillaah ʔarɹaħmaan ʔarɹaħiːm'),
+(2, 2, 'الْحَمْد لِلدَّايرَ مِلعلَمن', 'alħamd lidːaːjɹa milʕlamn'),
+(2, 3, 'أررحمانرحيب', 'ʔrrħmaːnrħiːb'),
+(2, 4, 'مَالِيكيمِدِ', 'maːliːkiːmidi'),
+(2, 5, 'إِيَّا كَانَمُودُ وَإِيَا كَنَ ستَع', 'ʔiːaː kaːnamuːdu waʔiːaː kana staʕ'),
+(2, 6, 'إِذْدِينَ الصِرَاقًامُستَقِ', 'ʔiðdiːna ʔas̪s̪i.ɹaːqaːmustaqi'),
+(2, 7, 'صِرَاطًالَّذِينَا أَنَّعَمْتَلَ إِهِ غَمِيرلْمَضُو بِعَادَ إِهود إم', 's̪i.ɹaːt̪aːllaðiːnaː ʔannaʕamtala ʔihi ɣamiːrlmadˤu.ː biʕaːda ʔihuːd ʔim');

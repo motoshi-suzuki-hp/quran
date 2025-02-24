@@ -1,7 +1,8 @@
 from flask import jsonify
 import torch
 import librosa
-import soundfile as sf
+# soundfileは使わないため、削除も可。ただし別の箇所で使うなら残してOK
+# import soundfile as sf
 from domain.exceptions import AudioRecognitionError
 from domain.services.evaluation import EvaluationService
 from infrastructure.services.audio_converter import AudioConverter
@@ -16,19 +17,31 @@ class AnalysisService:
         try:
             # AudioConverterで変換・保存時にユニークなファイル名を付与する処理を利用
             audio_wave_file = AudioConverter.convert_to_wav(audio_file, user_id, surah_id, ayah_id)
-            audio_data, sample_rate = sf.read(audio_wave_file)
 
-            if sample_rate != 16000:
-                audio_data = librosa.resample(audio_data, orig_sr=sample_rate, target_sr=16000)
-            input_values = self.processor(audio_data, sampling_rate=16000, return_tensors="pt").input_values
+            # librosa.loadでロード＆16kHzにリサンプリング
+            audio_data, sample_rate = librosa.load(audio_wave_file, sr=16000)
+
+            # モデルへの入力を準備 (Attention Mask も含める場合は return_tensors="pt", padding=True)
+            inputs = self.processor(
+                audio_data,
+                sampling_rate=16000,
+                return_tensors="pt",
+                padding=True
+            )
+
+            # 推論
             with torch.no_grad():
-                logits = self.model(input_values).logits
-            predicted_ids = torch.argmax(logits, dim=-1)
-            transcription = self.processor.decode(predicted_ids[0])
+                logits = self.model(inputs.input_values, attention_mask=inputs.attention_mask).logits
 
-            if transcription.strip() == "":
+            # 予測IDを文章に変換 (batch_decodeで戻り値はリストになる)
+            predicted_ids = torch.argmax(logits, dim=-1)
+            transcription = self.processor.batch_decode(predicted_ids)[0]
+
+            # 空文字の場合は認識エラーを送出
+            if not transcription.strip():
                 raise AudioRecognitionError("音声認識に失敗しました。")
 
+            # phonemizer等のロジックはEvaluationServiceにまとめられている想定
             predicted_phonemes = EvaluationService.text_to_phonemes(transcription)
             expected_phonemes = EvaluationService.text_to_phonemes(expected_text)
 
@@ -36,6 +49,7 @@ class AnalysisService:
                 predicted_phonemes, expected_phonemes, transcription, expected_text
             )
 
+            # 結果をJSONレスポンスとして返す
             result = {
                 "user_id": user_id,
                 "recognized_text": transcription.lower(),
@@ -45,6 +59,7 @@ class AnalysisService:
                 "feedback": feedback,
             }
             return jsonify(result)
+
         except AudioRecognitionError as e:
             return jsonify({"error": "Audio Recognition Error", "message": str(e)}), 400
         except Exception as e:

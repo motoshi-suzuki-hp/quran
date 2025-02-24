@@ -15,7 +15,6 @@ class AudioConverter:
     
     @staticmethod
     def generate_temporal_filename(user_id: int) -> str:
-
         return f"temp_audio_{user_id}.wav"
 
     def convert_to_wav(audio_file, user_id: int, surah_id: int, ayah_id: int) -> str:
