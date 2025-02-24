@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       <h1>
         <Link to="/">Quran.ai</Link>
       </h1>
-      <div>
+      <div className='header-buttons'>
         <LoginLogoutButton />
         <ProfileButton />
       </div>

@@ -42,6 +42,10 @@
     max-height: 300px;  /* 必要に応じて高さを調整 */
     transition: max-height 0.3s ease-in;
   }
+
+  .sidebar-mobile {
+    padding: 20px;
+  }
 }
 
 

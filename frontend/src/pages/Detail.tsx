@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '/app/src/App.css'
 import { Data, Feedback } from '../interface'
 import { API_URL } from '../const'
+import "./detail.css"
 
 const Detail: React.FC = () => {
   const navigate = useNavigate();
@@ -16,11 +17,13 @@ const Detail: React.FC = () => {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
   const [userId, setUserId] = useState<Number>(0);
   const [expectedText, setExpectedText] = useState<string>("");
   const [recognizedText, setRecognizedText] = useState<string>("");
   const [feedback, setFeedback] = useState<Feedback[]>([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +64,8 @@ const Detail: React.FC = () => {
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    streamRef.current = stream;
+
     const mediaRecorder = new MediaRecorder(stream);
     mediaRecorderRef.current = mediaRecorder;
 
@@ -75,6 +80,11 @@ const Detail: React.FC = () => {
   const stopRecording = () => {
     mediaRecorderRef.current?.stop();
     setIsRecording(false);
+
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+    }
   };
 
 

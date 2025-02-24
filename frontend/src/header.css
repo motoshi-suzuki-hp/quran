@@ -1,4 +1,5 @@
 .header {
+  max-width: 100%;
     background-color: #F8F7F1;
     color: black;
     padding: 15px 20px;
@@ -14,4 +15,11 @@
 .header h1 a {
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 768px) {
+  .header-buttons {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -21,7 +21,7 @@ const Home:React.FC = () => {
               <li>✅ <strong>Record & Compare</strong> - Record your pronunciation and compare it with the correct version</li>
           </ul>
 
-          {token ? <p className="startNow">Please select from the menu 🗒</p> : <a href="/login" className="startNow">Start Now 🚀</a>}
+          {token ? <p className="startNow">Please select from the menu 🗒</p> : <a href="/signup" className="startNow">Start Now 🚀</a>}
         </div>
     </div>
   );
