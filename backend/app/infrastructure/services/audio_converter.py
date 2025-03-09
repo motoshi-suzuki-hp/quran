@@ -1,6 +1,9 @@
 from pydub import AudioSegment
 import os
 import datetime
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 class AudioConverter:
     @staticmethod
@@ -15,7 +18,6 @@ class AudioConverter:
     
     @staticmethod
     def generate_temporal_filename(user_id: int) -> str:
-
         return f"temp_audio_{user_id}.wav"
 
     def convert_to_wav(audio_file, user_id: int, surah_id: int, ayah_id: int) -> str:
@@ -23,9 +25,20 @@ class AudioConverter:
         アップロードされた音声ファイルをwebmからwavに変換し、ユニークな名前で保存します。
         保存先は永続的なディレクトリ（例: ./media/yours）とします。
         """
-        temp_webm_path = "temp_audio.webm"
-        # 一時的なwebmファイルとして保存
-        audio_file.save(temp_webm_path)
+
+        # MIMEタイプからフォーマットを判定する
+        mime = audio_file.content_type.lower()
+        if "mp4" in mime or "m4a" in mime:
+            extension = "m4a"
+        elif "webm" in mime:
+            extension = "webm"
+        elif extension is None:
+            extension = "webm"  # デフォルト
+
+        # 一時的なファイルとして保存
+        temp_path = f"temp_audio.{extension}"
+        audio_file.save(temp_path)
+
         
         # ユニークなファイル名を生成
         unique_filename = AudioConverter.generate_unique_filename(user_id, surah_id, ayah_id)
@@ -38,10 +51,10 @@ class AudioConverter:
         output_path = os.path.join(output_dir, unique_filename)
         
         try:
-            sound = AudioSegment.from_file(temp_webm_path, format="webm")
+            sound = AudioSegment.from_file(temp_path, format=extension)
             sound.export(temporal_output_path, format="wav")
             sound.export(output_path, format="wav")
             return temporal_output_path
         finally:
-            if os.path.exists(temp_webm_path):
-                os.remove(temp_webm_path)
+            if os.path.exists(temp_path):
+                os.remove(temp_path)

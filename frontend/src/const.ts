@@ -12,8 +12,9 @@ export const LANGUAGE = [
 ];
 
 export const Surahs: string[] = [
-    "Al-Fatihah",
-    "Al-Baqarah",
+    "Al-Fatihah (ChatGPT)",
+    "Al-Fatihah (recognition & phonemize)",
+    // "Al-Baqarah",
     // "Aal-E-Imran",
     // "An-Nisa",
     // "Al-Maidah",

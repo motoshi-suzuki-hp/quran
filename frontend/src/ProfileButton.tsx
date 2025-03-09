@@ -17,6 +17,8 @@ const ProfileButton: React.FC = () => {
           Profile
         </button>
     );
+  } else {
+    return null;
   };
 };
 
